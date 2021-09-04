@@ -6,7 +6,9 @@
 // 64 bit
 
 typedef struct {
-  Elf64_Char e_ident[EI_NIDENT];
+  Elf64_Char e_magic[4];
+  Elf64_Char e_class;
+  Elf64_Char e_data_fmt;
   Elf64_Half e_type;
   Elf64_Half e_machine;
   Elf64_Word e_version;
@@ -25,7 +27,9 @@ typedef struct {
 // 32 bit
 
 typedef struct {
-  Elf32_Char e_ident[EI_NIDENT];
+  Elf32_Char e_magic[4];
+  Elf32_Char e_class;
+  Elf32_Char e_data_fmt;
   Elf32_Half e_type;
   Elf32_Half e_machine;
   Elf32_Word e_version;
@@ -62,7 +66,11 @@ int getELFFormat(FILE* file) {
 Elf64_Ehdr getHeaderLong(FILE* file) {
   Elf64_Ehdr hdr;
   fseek(file,0,SEEK_SET);
-  fread(hdr.e_ident, 16, 1, file);
+  fread(hdr.e_magic, 4, 1, file);
+  fread(&hdr.e_class, 1, sizeof(Elf64_Char), file);
+  fread(&hdr.e_data_fmt, 1, sizeof(Elf64_Char), file);
+  fread(&hdr.e_version, 1, sizeof(Elf64_Char), file);
+  fseek(file,16,SEEK_SET);
   fread(&hdr.e_type,1,sizeof(Elf64_Half), file);
   fread(&hdr.e_machine,1,sizeof(Elf64_Half), file);
   fread(&hdr.e_version,1,sizeof(Elf64_Word), file);
