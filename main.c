@@ -24,7 +24,7 @@ int parse_elf(char* filename) {
     printf("This tool can only run AMD64 LSB ELF binaries (you provided a binary with a completely different architecture)\n");
     return -5;
   }
-  printf("Number of segment entries is: %u\nEntry point is %lx\n",header.e_shnum,header.e_entry);
+  printf("Number of segment entries is: %u\nEntry point is 0x%lx\n",header.e_shnum,header.e_entry);
   return 0;
 }
 
