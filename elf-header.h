@@ -73,8 +73,4 @@ typedef struct ELF_Header_64
 
 #include <stdio.h>
 
-int getELFClass(FILE* file);
-
-int getELFFormat(FILE* file);
-
 ELF_Header_64 getHeaderLong(FILE* file);
