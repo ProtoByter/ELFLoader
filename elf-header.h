@@ -51,6 +51,8 @@ typedef struct ELF_Header_64
     uint8_t     magic[4];
     uint8_t     _class;
     uint8_t     data_encoding;
+    uint8_t     abi;
+    uint8_t     padding[8];
     uint16_t    type;
     uint16_t    machine;
     uint32_t    version;

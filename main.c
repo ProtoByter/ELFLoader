@@ -11,11 +11,11 @@ int parse_elf(char* filename) {
     printf("This tool can only run AMD64 LSB ELF binaries (you provided a non-ELF binary)\n");
     return -2;
   }
-  if (getELFClass(elf_file) != ELF_Class_64) {
+  if (header._class != ELF_Class_64) {
     printf("This tool can only run AMD64 LSB ELF binaries (you provided a 32bit binary)\n");
     return -3;
   }
-  if (getELFFormat(elf_file) != ELF_Data_Encoding_Little) {
+  if (header.data_encoding != ELF_Data_Encoding_Little) {
     printf("This tool can only run AMD64 LSB ELF binaries (you provided a big endian binary)\n");
     return -4;
   }
