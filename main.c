@@ -24,7 +24,7 @@ int parse_elf(char* filename) {
     return -5;
   }
   if (header.type != ELF_Executable_Type_Executable) {
-    printf("This tool can only run AMD64 LSB ELF binaries (you provided a file which isn't an excutable)");
+    printf("This tool can only run AMD64 LSB ELF binaries (you provided a file which isn't an excutable)\n");
   }
   printf("Number of segment entries is: %u\nEntry point is 0x%lx\n",header.section_header_entry_count,header.entrypoint);
   return 0;
