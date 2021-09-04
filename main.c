@@ -7,14 +7,18 @@
 int parse_elf(char* filename) {
   FILE* elf_file = fopen(filename,"r");
   if (getELFClass(elf_file) != ELFCLASS64) {
-    printf("This tool can only run 64bit ELF binaries\n");
+    printf("This tool can only run AMD64 LSB ELF binaries (you provided a 32bit binary)\n");
     return -2;
   }
   if (getELFFormat(elf_file) != ELFDATA2LSB) {
-    printf("This tool can only run 64bit *LSB* ELF binaries\n");
+    printf("This tool can only run AMD64 LSB ELF binaries (you provided a big endian binary)\n");
     return -3;
   }
   Elf64_Ehdr header = getHeaderLong(elf_file);
+  if (header.e_machine != EM_AMD64) {
+    printf("This tool can only run AMD64 LSB ELF binaries (you provided a binary with a completely different architecture)\n");
+    return -4;
+  }
   printf("Number of segment entries is: %u\nEntry point is %lx\n",header.e_shnum,header.e_entry);
   return 0;
 }
