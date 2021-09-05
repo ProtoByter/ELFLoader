@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "elf-header.h"
+#include <elf.h>
 
 void print_error(const char* reason) {
   printf("This tool can only run AMD64 LSB ELF binaries (%s)\n", reason);
