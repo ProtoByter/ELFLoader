@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
 int main(int args_count, char** args)
 {
@@ -87,7 +88,7 @@ int main(int args_count, char** args)
         return 6;
 
     default:
-        printf("Internal Fault: Received result %d when calling ELF_Read_Header (%s | %llu)", elf_result, args[1], size);
+        printf("Internal Fault: Received result %d when calling ELF_Read_Header (%s | %ld)", elf_result, args[1], size);
         free(buffer);
         return 7;
     }
