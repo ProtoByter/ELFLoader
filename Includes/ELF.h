@@ -27,7 +27,7 @@
 typedef struct ELF_Header
 {
     uint8_t     magic[4];
-    uint8_t     _class;
+    uint8_t     binary_class;
     uint8_t     data_encoding;
     uint8_t     version_ident;
     uint8_t     abi;
