@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(ELFLoader LANGUAGES C VERSION 1.0.0)
+project(kOS.ELFLoader LANGUAGES C VERSION 1.0.0)
 
-add_executable(ELFLoader
+# TODO: allow this to be a static / shared library later down the line
+add_executable(kOS.ELFLoader
     ${CMAKE_CURRENT_LIST_DIR}/Includes/ELF/ProgramHeader.h
     ${CMAKE_CURRENT_LIST_DIR}/Includes/ELF/SectionHeader.h
     ${CMAKE_CURRENT_LIST_DIR}/Includes/ELF.h
