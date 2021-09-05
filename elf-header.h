@@ -46,13 +46,37 @@ enum ELF_Data_Encoding
     ELF_Data_Encoding_Big
 };
 
+enum ELF_ABI
+{
+    ELF_ABI_SYSV = 0,
+    ELF_ABI_HPUX = 1,
+    ELF_ABI_NetBSD = 2,
+    ELF_ABI_Linux = 3,
+    ELF_ABI_Hurd = 4,
+    ELF_ABI_Solaris = 6,
+    ELF_ABI_AIX = 7,
+    ELF_ABI_IRIX = 8,
+    ELF_ABI_FreeBSD = 9,
+    ELF_ABI_Tru64 = 10,
+    ELF_ABI_Novell_Modesto = 11,
+    ELF_ABI_OpenBSD = 12,
+    ELF_ABI_OpenVMS = 13,
+    ELF_ABI_NonStop = 14,
+    ELF_ABI_AROS = 15,
+    ELF_ABI_Fenix = 16,
+    ELF_ABI_CloudABI = 17,
+    ELF_ABI_OpenVOS = 18
+};
+
 typedef struct ELF_Header_64
 {
     uint8_t     magic[4];
     uint8_t     _class;
     uint8_t     data_encoding;
+    uint8_t     version_ident;
     uint8_t     abi;
-    uint8_t     padding[8];
+    uint8_t     abi_version;
+    uint8_t     padding[7];
     uint16_t    type;
     uint16_t    machine;
     uint32_t    version;
