@@ -38,6 +38,9 @@ add_executable(kOS.ELFLoader
 
 target_include_directories(kOS.ELFLoader PRIVATE Includes)
 
-if(WIN32) # TODO: remove later
+# TODO: remove later
+if(WIN32)
     target_compile_definitions(kOS.ELFLoader PRIVATE _CRT_SECURE_NO_WARNINGS)
+elseif()
+    target_compile_options(kOS.ELFLoader -Wno-format)
 endif()
