@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <inttypes.h>
 
 int main(int args_count, char** args)
 {
@@ -35,13 +36,13 @@ int main(int args_count, char** args)
     FILE* file = fopen(args[1], "r");
     if (file == NULL)
     {
-        printf("Failed to open \"%s\": code %d.\n", args[1], errno);
+        printf("Failed to open \"%s\": code %"PRId32".\n", args[1], errno);
         return 2;
     }
 
     if (fseek(file, 0, SEEK_END) != 0)
     {
-        printf("Failed to seek to the end of \"%s\": code %d.\n", args[1], ferror(file));
+        printf("Failed to seek to the end of \"%s\": code %"PRId32".\n", args[1], ferror(file));
         fclose(file);
         return 3;
     }
@@ -49,7 +50,7 @@ int main(int args_count, char** args)
     int64_t size = (int64_t)ftell(file); // long is 32 bits wide on Windows and 64 bits wide everywhere else, this is just a mess
     if (size < sizeof(ELF_Header))
     {
-        printf("Failed to get the full size of \"%s\": code %d\n", args[1], errno);
+        printf("Failed to get the full size of \"%s\": code %"PRId32".\n", args[1], errno);
         fclose(file);
         return 4;
     }
@@ -70,7 +71,7 @@ int main(int args_count, char** args)
     fclose(file);
     if (read_result < 1)
     {
-        printf("Failed to read \"%s\": code %d.\n", args[1], ferror(file));
+        printf("Failed to read \"%s\": code %"PRId32".\n", args[1], ferror(file));
         free(buffer);
         return 5;
     }
@@ -88,7 +89,7 @@ int main(int args_count, char** args)
         return 6;
 
     default:
-        printf("Internal Fault: Received result %d when calling ELF_Read_Header (%s | %ld)", elf_result, args[1], size);
+        printf("Internal Fault: Received result %"PRId32" when calling ELF_Read_Header (%s | %"PRIx64")", elf_result, args[1], size);
         free(buffer);
         return 7;
     }
