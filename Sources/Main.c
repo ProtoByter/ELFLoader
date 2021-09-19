@@ -48,7 +48,7 @@ int main(int args_count, char** args)
     }
 
     int64_t size = (int64_t)ftell(file); // long is 32 bits wide on Windows and 64 bits wide everywhere else, this is just a mess
-    if (size < sizeof(ELF_Header))
+    if (size < sizeof(ELF_Header_64))
     {
         printf("Failed to get the full size of \"%s\": code %"PRId32".\n", args[1], errno);
         fclose(file);
@@ -93,6 +93,8 @@ int main(int args_count, char** args)
         free(buffer);
         return 7;
     }
+
+
 
     // TODO: read other stuff from our buffer
 

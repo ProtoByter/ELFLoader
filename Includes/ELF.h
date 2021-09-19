@@ -24,7 +24,7 @@
 
 // TODO: improve in-code doxygen documentation
 
-typedef struct ELF_Header
+typedef struct ELF_Header_64
 {
     uint8_t     magic[4];
     uint8_t     binary_class;
@@ -46,6 +46,46 @@ typedef struct ELF_Header
     uint16_t    section_header_entry_size;
     uint16_t    section_header_entry_count;
     uint16_t    section_header_index;
+} ELF_Header_64;
+
+typedef struct ELF_Header_32 {
+    uint8_t     magic[4];
+    uint8_t     binary_class;
+    uint8_t     data_encoding;
+    uint8_t     version_ident;
+    uint8_t     abi;
+    uint8_t     abi_version;
+    uint8_t     padding[7];
+    uint16_t    type;
+    uint16_t    machine;
+    uint32_t    version;
+    uint32_t    entrypoint;
+    uint32_t    program_header_offset;
+    uint32_t    section_header_offset;
+    uint32_t    flags;
+    uint16_t    header_size;
+    uint16_t    program_header_entry_size;
+    uint16_t    program_header_entry_count;
+    uint16_t    section_header_entry_size;
+    uint16_t    section_header_entry_count;
+    uint16_t    section_header_index;
+} ELF_Header_32;
+
+typedef union ELF_Header_Union {
+    ELF_Header_32 Header_32;
+    ELF_Header_64 Header_64;
+} ELF_Header_Union;
+
+enum ELF_Class
+{
+    ELF_Class_None,
+    ELF_Class_32,
+    ELF_Class_64
+};
+
+typedef struct ELF_Header {
+    ELF_Header_Union header_data;
+    enum ELF_Class class;
 } ELF_Header;
 
 enum ELF_Executable_Type
@@ -76,13 +116,6 @@ enum ELF_Version
 {
     ELF_Version_None,
     ELF_Version_Current
-};
-
-enum ELF_Class
-{
-    ELF_Class_None,
-    ELF_Class_32,
-    ELF_Class_64
 };
 
 enum ELF_Data_Encoding
