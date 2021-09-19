@@ -28,7 +28,8 @@ ELF_Result ELF_Read_Header(ELF_Header* header, uint8_t* buffer, size_t length)
 
     ELF_Header internal_header;
 
-    switch (buffer[4]) {
+    switch (buffer[4]) 
+    {
     case ELF_Class_32:
     {
         internal_header.class = ELF_Class_32;
