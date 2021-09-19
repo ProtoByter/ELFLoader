@@ -28,19 +28,26 @@ ELF_Result ELF_Read_Header(ELF_Header* header, uint8_t* buffer, size_t length)
 
     ELF_Header internal_header;
 
-    if (buffer[4] == ELF_Class_32) {
+    switch (buffer[4]) {
+    case ELF_Class_32:
+    {
         internal_header.class = ELF_Class_32;
         ELF_Header_32 header32;
         memcpy(&header32, buffer, sizeof(ELF_Header_32));
         internal_header.header_data.Header_32 = header32;
+        break;
     }
-    else if (buffer[4] == ELF_Class_64) {
+
+    case ELF_Class_64:
+    {
         internal_header.class = ELF_Class_64;
         ELF_Header_64 header64;
         memcpy(&header64, buffer, sizeof(ELF_Header_64));
         internal_header.header_data.Header_64 = header64;
+        break;
     }
-    else {
+    
+    default:
         return ELF_Result_Invalid_Data;
     }
 
